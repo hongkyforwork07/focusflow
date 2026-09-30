@@ -1,0 +1,34 @@
+import { useReducer, useEffect } from 'react';
+import { timerReducer, initialTimerState } from './timerReducer';
+
+export function useTimer(customDuration = 1500) {
+  // Khởi tạo state với thời gian được truyền vào (nếu có)
+  const [state, dispatch] = useReducer(timerReducer, {
+    ...initialTimerState,
+    remainingSeconds: customDuration,
+    duration: customDuration,
+  });
+
+  useEffect(() => {
+    let intervalId;
+    if (state.status === 'running') {
+      intervalId = setInterval(() => {
+        dispatch({ type: 'TICK' });
+      }, 500);
+    }
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [state.status]);
+
+  const start = () => dispatch({ type: 'START' });
+  const pause = () => dispatch({ type: 'PAUSE' });
+  const reset = () => dispatch({ type: 'RESET' });
+
+  return { 
+    ...state, 
+    start, 
+    pause, 
+    reset 
+  };
+}
