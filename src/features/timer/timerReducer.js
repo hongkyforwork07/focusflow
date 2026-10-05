@@ -45,7 +45,22 @@ export function timerReducer(state, action) {
         duration: defaultDuration,
         endAt: null 
       };
-      
+
+    case 'SWITCH_MODE': {
+      // payload chứa { mode: 'focus' | 'shortBreak' | 'longBreak', duration: số giây }
+      const newMode = action.payload.mode; 
+      const newDuration = action.payload.duration; 
+
+      return {
+        ...state,
+        mode: newMode,               // Chuyển sang chế độ mới (VD: 'shortBreak')
+        status: 'idle',              // Đưa về trạng thái sẵn sàng
+        remainingSeconds: newDuration, // Cập nhật số giây (VD: Nghỉ ngắn = 300)
+        duration: newDuration,       // Lưu lại tổng thời gian của chế độ này
+        endAt: null,                 // Xóa timestamp đếm ngược cũ
+      };
+    }
+          
     default:
       return state;
   }
