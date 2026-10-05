@@ -1,8 +1,8 @@
 export const initialTimerState = {
-  mode: "focus", // focus | shortBreak | longBreak
-  status: "idle", // idle | running | paused | completed
+  mode: "focus", 
+  status: "idle", 
   remainingSeconds: 1500, 
-  duration: 1500,
+  duration: 1500, 
   endAt: null,
 };
 
@@ -37,30 +37,27 @@ export function timerReducer(state, action) {
       return { ...state, remainingSeconds: remaining };
       
     case 'RESET':
-      const defaultDuration = state.mode === 'focus' ? 1500 : 300;
       return { 
         ...state, 
         status: 'idle', 
-        remainingSeconds: defaultDuration, 
-        duration: defaultDuration,
+        remainingSeconds: state.duration, 
         endAt: null 
       };
 
+    // Hành động chuyển đổi chế độ
     case 'SWITCH_MODE': {
-      // payload chứa { mode: 'focus' | 'shortBreak' | 'longBreak', duration: số giây }
       const newMode = action.payload.mode; 
       const newDuration = action.payload.duration; 
-
       return {
         ...state,
-        mode: newMode,               // Chuyển sang chế độ mới (VD: 'shortBreak')
-        status: 'idle',              // Đưa về trạng thái sẵn sàng
-        remainingSeconds: newDuration, // Cập nhật số giây (VD: Nghỉ ngắn = 300)
-        duration: newDuration,       // Lưu lại tổng thời gian của chế độ này
-        endAt: null,                 // Xóa timestamp đếm ngược cũ
+        mode: newMode,
+        status: 'idle',
+        remainingSeconds: newDuration,
+        duration: newDuration,
+        endAt: null,
       };
     }
-          
+      
     default:
       return state;
   }

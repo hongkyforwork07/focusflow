@@ -23,11 +23,17 @@ export function useTimer(customDuration = 1500) {
   const start = () => dispatch({ type: 'START' });
   const pause = () => dispatch({ type: 'PAUSE' });
   const reset = () => dispatch({ type: 'RESET' });
+  
+  // Hàm chuyển chế độ
+  const switchMode = (mode, duration) => {
+    dispatch({ type: 'SWITCH_MODE', payload: { mode, duration } });
+  };
 
   return { 
     ...state, 
     start, 
     pause, 
-    reset 
+    reset,
+    switchMode 
   };
 }
