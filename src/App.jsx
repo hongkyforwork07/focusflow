@@ -8,11 +8,13 @@ import SettingsModal from './components/settings/SettingsModal';
 import { useTasks } from './hooks/useTasks';
 import { useSessions } from './hooks/useSessions';
 import { useLocalStorage } from './hooks/useLocalStorage';
+import { useGamification } from './hooks/useGamification';
 import { playAlarmSound } from './utils/sound';
 
 export default function App() {
   const { tasks, addTask, toggleTaskDone, deleteTask, incrementTaskProgress } = useTasks();
   const { sessions, addSession } = useSessions();
+  const { level, expProgress, gainExp } = useGamification();
   
   // State quản lý task đang được chọn làm mục tiêu cho Timer
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -39,7 +41,7 @@ export default function App() {
     // Phát âm thanh báo hiệu
     playAlarmSound();
 
-    // 1. Ghi lại lịch sử Session
+    // Ghi lại lịch sử Session
     addSession({
       taskId: selectedTask?.id,
       taskTitle: selectedTask?.title,
@@ -48,16 +50,22 @@ export default function App() {
       completed: true
     });
 
-    // 2. Nếu đang ở mode 'focus' và có chọn Task, cộng pomodoro cho task đó
-    if (selectedTask && mode === 'focus') {
-      incrementTaskProgress(selectedTask.id, durationSeconds);
+    // Nếu đang ở mode 'focus' và có chọn Task, cộng pomodoro cho task đó
+    if (mode === 'focus') {
+      gainExp(50); // Mỗi phiên tập trung thành công cộng 50 điểm
+    } else {
+      gainExp(10); // Nghỉ ngơi ngoan ngoãn cũng được cộng nhẹ 10 điểm khích lệ
     }
   };
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors flex flex-col">
-      {/* Header điều hướng */}
-      <Header onOpenSettings={() => setIsSettingsOpen(true)} />
+      {/* Header dieu huong */}
+      <Header 
+        onOpenSettings={() => setIsSettingsOpen(true)} 
+        level={level}
+        expProgress={expProgress}
+      />
 
       {/* Nội dung chính */}
       <main className="flex-1 max-w-6xl w-full mx-auto p-4 sm:p-6 lg:p-8 flex flex-col">
