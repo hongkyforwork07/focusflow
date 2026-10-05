@@ -1,7 +1,7 @@
 export function getDailyStats(sessions, tasks) {
   const today = new Date().toDateString();
 
-  // 1. Lọc các phiên Pomodoro (focus) đã hoàn thành trong ngày hôm nay
+  // Task Filter
   const todaySessions = sessions.filter(
     session => 
       new Date(session.endedAt).toDateString() === today && 
@@ -9,12 +9,11 @@ export function getDailyStats(sessions, tasks) {
       session.mode === 'focus'
   );
 
-  // 2. Tính số lượng Pomodoro và tổng số phút
+  // Calculate Statistics
   const pomodorosToday = todaySessions.length;
   const focusSecondsToday = todaySessions.reduce((total, session) => total + session.durationSeconds, 0);
   const focusMinutesToday = Math.floor(focusSecondsToday / 60);
 
-  // 3. Tính tỷ lệ hoàn thành Task
   const completedTasks = tasks.filter(t => t.status === 'done').length;
   const totalTasks = tasks.length;
 

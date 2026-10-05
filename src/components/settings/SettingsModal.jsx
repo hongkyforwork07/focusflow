@@ -34,7 +34,7 @@ export default function SettingsModal({ isOpen, onClose, focusDuration, onSaveDu
           <button onClick={onClose} className="text-slate-400 hover:text-slate-600 font-bold text-lg p-1">✕</button>
         </div>
 
-        {/* Form cấu hình thời gian */}
+        {/* Time Configuring */}
         <form onSubmit={handleSave} className="space-y-6">
           <div>
             <label className="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2">
@@ -51,7 +51,7 @@ export default function SettingsModal({ isOpen, onClose, focusDuration, onSaveDu
             <p className="text-xs text-slate-500 mt-1">Mặc định: 25 phút. Thay đổi sẽ áp dụng ngay cho phiên tiếp theo.</p>
           </div>
 
-          {/* Vùng nguy hiểm: Reset Data */}
+          {/* Reset Data */}
           <div className="p-4 bg-red-50 dark:bg-red-950/20 border border-red-200 dark:border-red-900/50 rounded-xl">
             <h3 className="text-red-600 dark:text-red-400 font-bold text-sm mb-1">Vùng nguy hiểm</h3>
             <p className="text-slate-600 dark:text-slate-400 text-xs mb-3">Xóa sạch toàn bộ task và lịch sử pomodoro.</p>

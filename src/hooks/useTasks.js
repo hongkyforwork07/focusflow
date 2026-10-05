@@ -47,5 +47,5 @@ export function useTasks() {
 
   // Đừng quên export hàm này ở dòng return cuối cùng:
   return { tasks, addTask, toggleTaskDone, deleteTask, incrementTaskProgress };
-  return { tasks, addTask, toggleTaskDone, deleteTask };
+
 }

@@ -13,7 +13,7 @@ export default function TaskList({ tasks, addTask, toggleTaskDone, deleteTask, s
 
   return (
     <div className="flex flex-col h-full">
-      {/* Tiêu đề & Thống kê số lượng (Đã tách dòng/flex an toàn không đè chữ) */}
+      {/* Title */}
       <div className="flex items-center justify-between mb-4 pb-2 border-b border-slate-100 dark:border-slate-700/60">
         <h2 className="text-base font-bold text-slate-800 dark:text-slate-100">
           DANH SÁCH CÔNG VIỆC
@@ -23,7 +23,7 @@ export default function TaskList({ tasks, addTask, toggleTaskDone, deleteTask, s
         </span>
       </div>
 
-      {/* Form thêm Task rộng rãi, nút Thêm nằm gọn bên phải */}
+      {/* Task Update */}
       <form onSubmit={handleSubmit} className="mb-4 flex gap-2">
         <input
           type="text"
@@ -41,7 +41,7 @@ export default function TaskList({ tasks, addTask, toggleTaskDone, deleteTask, s
         </button>
       </form>
 
-      {/* Danh sách Task */}
+      {/* Task List */}
       <ul className="flex-1 overflow-y-auto space-y-2.5 pr-1 custom-scrollbar max-h-[480px]">
         {tasks.map(task => (
           <li 

@@ -2,7 +2,7 @@ export const initialTimerState = {
   mode: "focus", // focus | shortBreak | longBreak
   status: "idle", // idle | running | paused | completed
   remainingSeconds: 1500, 
-  duration: 1500, // Thêm biến lưu thời lượng gốc của phiên
+  duration: 1500,
   endAt: null,
 };
 

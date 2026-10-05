@@ -2,7 +2,6 @@ import { useReducer, useEffect } from 'react';
 import { timerReducer, initialTimerState } from './timerReducer';
 
 export function useTimer(customDuration = 1500) {
-  // Khởi tạo state với thời gian được truyền vào (nếu có)
   const [state, dispatch] = useReducer(timerReducer, {
     ...initialTimerState,
     remainingSeconds: customDuration,

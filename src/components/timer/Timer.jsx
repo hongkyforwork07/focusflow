@@ -3,10 +3,9 @@ import { useTimer } from '../../features/timer/useTimer';
 import { formatTime } from '../../utils/formatTime';
 
 export default function Timer({ durationSeconds, onComplete }) {
-  // Nhận durationSeconds truyền vào từ App.jsx
   const { status, remainingSeconds, duration, mode, start, pause, reset } = useTimer(durationSeconds);
 
-  // Kích hoạt ghi nhận khi hoàn thành phiên
+  // Session Complete
   React.useEffect(() => {
     if (status === 'completed') {
       onComplete(duration, mode); 
